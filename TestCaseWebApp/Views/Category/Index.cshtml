@@ -1,0 +1,64 @@
+﻿
+@model CategoryViewModel
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <h1 class="h3">Category List</h1>
+        <hr>
+        <a class="btn btn-primary btn-sm" asp-controller="Category" asp-action="Create">Create Category</a>
+        <hr>
+        <table data-page-length='3' id="myTable" class="table table-bordered mt-3">
+            <thead>
+                <tr>
+
+                    
+                    <td>Name</td>
+                    <td>Description</td>
+                    
+                    <td style="width: 160px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Categories.Count > 0)
+                {
+                    @foreach (var item in Model.Categories)
+                    {
+                        <tr>
+
+                            
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            
+                            <td>
+                                <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+
+                                <form asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" method="POST" style="display: inline;">
+                                    <input type="hidden" name="id" value="@item.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <h3>No Vehicles</h3>
+                    </div>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+}
